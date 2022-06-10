@@ -1,8 +1,6 @@
 @JS()
 library chapi;
 
-import 'dart:ui';
-
 import 'package:js/js.dart';
 
 import 'chapi.dart';
