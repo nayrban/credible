@@ -81,8 +81,7 @@ jobs:
     - name: Install Build Essentials
       run: |
         sudo apt-get install -y build-essential
-        sudo apt-get install gcc gcc-i686-linux-gnu
-        sudo apt-get install glibc
+        sudo apt-get install gcc gcc-i686-linux-gnu      
         sudo apt-get install libgcc
 
     - name: DIDKIT | rustup android
@@ -121,85 +120,85 @@ jobs:
       working-directory: ./main
       run: flutter test test/
   
-  ios_ci:
-    # This job will run on macos virtual machine
-    runs-on: macos-latest
-    steps:
-      
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        path: main
-
-    # Clones didkit
-    - name: Clone didkit
-      uses: actions/checkout@v2
-      with:
-        repository: spruceid/didkit
-        path: didkit
-
-    # Clones ssi
-    - name: Clone SSI
-      uses: actions/checkout@v2
-      with:
-        repository: spruceid/ssi
-        path: ssi
-        submodules: 'recursive'
-
-    # Setup the flutter environment.
-    - name: SETUP | Flutter
-      uses: subosito/flutter-action@v1
-      with:
-        channel: 'beta'
-
-    - name: SETUP | Rust
-      uses: ATiltedTree/setup-rust@v1
-      with:
-        rust-version: stable
-  
-    - name: DIDKIT | rustup ios
-      working-directory: ./didkit
-      run: make -C lib install-rustup-ios
-
-    - name: DIDKIT | ios.stamp
-      working-directory: ./didkit
-      run: make -C lib ../target/test/ios.stamp
-      
-    - name: FLUTTER | pub get
-      working-directory: ./main
-      run: flutter pub get
-
-    # Check for any formatting issues in the code.
-    - name: FLUTTER | format
-      working-directory: ./main
-      run: flutter format --set-exit-if-changed .
-
-    # Statically analyze the Dart code for any errors.
-    - name: FLUTTER | analyze
-      working-directory: ./main
-      run: flutter analyze .
-
-    # Run widget tests for our flutter project.
-    - name: FLUTTER | test
-      working-directory: ./main
-      run: flutter test test/
-
-    # # Build apk.
-    # - run: flutter build apk --release
-    
-    # # Upload generated apk to the artifacts.
-    # - name: Upload apk
-    # - uses: actions/upload-artifact@v1
-    #   with:
-    #     name: release-apk
-    #     path: build/app/outputs/apk/release/app-release.apk
-    
-    # # Build ipa.
-    # - run: flutter build ios --release --no-codesign
-        
-    # # Upload generated apk to the artifacts.
-    # - name: Upload IPA
-    #   uses: actions/upload-artifact@v1
-    #   with:
-    #     name: ios-build
-    #     path: build/ios/iphoneos
+#  ios_ci:
+#    # This job will run on macos virtual machine
+#    runs-on: macos-latest
+#    steps:
+#
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#      with:
+#        path: main
+#
+#    # Clones didkit
+#    - name: Clone didkit
+#      uses: actions/checkout@v2
+#      with:
+#        repository: spruceid/didkit
+#        path: didkit
+#
+#    # Clones ssi
+#    - name: Clone SSI
+#      uses: actions/checkout@v2
+#      with:
+#        repository: spruceid/ssi
+#        path: ssi
+#        submodules: 'recursive'
+#
+#    # Setup the flutter environment.
+#    - name: SETUP | Flutter
+#      uses: subosito/flutter-action@v1
+#      with:
+#        channel: 'beta'
+#
+#    - name: SETUP | Rust
+#      uses: ATiltedTree/setup-rust@v1
+#      with:
+#        rust-version: stable
+#
+#    - name: DIDKIT | rustup ios
+#      working-directory: ./didkit
+#      run: make -C lib install-rustup-ios
+#
+#    - name: DIDKIT | ios.stamp
+#      working-directory: ./didkit
+#      run: make -C lib ../target/test/ios.stamp
+#
+#    - name: FLUTTER | pub get
+#      working-directory: ./main
+#      run: flutter pub get
+#
+#    # Check for any formatting issues in the code.
+#    - name: FLUTTER | format
+#      working-directory: ./main
+#      run: flutter format --set-exit-if-changed .
+#
+#    # Statically analyze the Dart code for any errors.
+#    - name: FLUTTER | analyze
+#      working-directory: ./main
+#      run: flutter analyze .
+#
+#    # Run widget tests for our flutter project.
+#    - name: FLUTTER | test
+#      working-directory: ./main
+#      run: flutter test test/
+#
+#    # # Build apk.
+#    # - run: flutter build apk --release
+#
+#    # # Upload generated apk to the artifacts.
+#    # - name: Upload apk
+#    # - uses: actions/upload-artifact@v1
+#    #   with:
+#    #     name: release-apk
+#    #     path: build/app/outputs/apk/release/app-release.apk
+#
+#    # # Build ipa.
+#    # - run: flutter build ios --release --no-codesign
+#
+#    # # Upload generated apk to the artifacts.
+#    # - name: Upload IPA
+#    #   uses: actions/upload-artifact@v1
+#    #   with:
+#    #     name: ios-build
+#    #     path: build/ios/iphoneos
