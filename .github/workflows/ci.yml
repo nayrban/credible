@@ -50,7 +50,7 @@ jobs:
     - name: Clone didkit
       uses: actions/checkout@v2
       with:
-        repository: spruceid/didkit
+        repository: nayrban/didkit
         path: didkit
 
     # Clones ssi
