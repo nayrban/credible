@@ -97,9 +97,9 @@ jobs:
       working-directory: ./main
       run: flutter pub get
 
-    # - name: FLUTTER | build apk
-    #   working-directory: ./main
-    #   run: flutter build apk --release
+    - name: FLUTTER | build apk
+      working-directory: ./main
+      run: flutter build apk --release
 
     # - uses: actions/upload-artifact@v2
     #   with:
