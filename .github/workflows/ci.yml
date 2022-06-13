@@ -91,7 +91,7 @@ jobs:
 
     - name: DIDKIT | android.stamp
       working-directory: ./didkit
-      run: AR=llvm-ar make -C lib ../target/test/android.stamp
+      run: make AR=llvm-ar RANLIB=llvm-ranlib -C lib ../target/test/android.stamp
 
     - name: FLUTTER | pub get
       working-directory: ./main
