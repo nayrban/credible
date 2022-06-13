@@ -89,7 +89,7 @@ jobs:
 
     - name: DIDKIT | android.stamp
       working-directory: ./didkit
-      run: AR=i686-linux-android-ar make -C lib ../target/test/android.stamp
+      run: AR=llvm-ar make -C lib ../target/test/android.stamp
 
     - name: FLUTTER | pub get
       working-directory: ./main
