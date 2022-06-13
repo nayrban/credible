@@ -21,6 +21,7 @@ class _BaseItem extends StatefulWidget {
     required this.child,
     this.onTap,
     this.enabled = true,
+    // ignore: unused_element
     this.selected,
   }) : super(key: key);
 

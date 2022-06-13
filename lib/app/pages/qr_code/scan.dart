@@ -15,6 +15,7 @@ class QrCodeScanPage extends StatefulWidget {
   _QrCodeScanPageState createState() => _QrCodeScanPageState();
 }
 
+// ignore: deprecated_member_use
 class _QrCodeScanPageState extends ModularState<QrCodeScanPage, QRCodeBloc> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   late QRViewController qrController;

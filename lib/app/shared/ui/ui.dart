@@ -17,15 +17,21 @@ class Ui {
 
   // ignore: unused_element
   const Ui._credible({
+    // ignore: unused_element
     this.palette = const CrediblePalette(),
+    // ignore: unused_element
     this.constraints = const CredibleConstraints(),
+    // ignore: unused_element
     this.text = const CredibleText(),
   });
 
   // ignore: unused_element
   const Ui._degen({
+    // ignore: unused_element
     this.palette = const DegenPalette(),
+    // ignore: unused_element
     this.constraints = const DegenConstraints(),
+    // ignore: unused_element
     this.text = const DegenText(),
   });
 }
