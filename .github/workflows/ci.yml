@@ -76,7 +76,8 @@ jobs:
     - name: SETUP | Rust
       uses: ATiltedTree/setup-rust@v1
       with:
-        rust-version: stable
+        rust-version: 1.57.0
+#        rust-version: stable
 
     - name: Install Build Essentials
       run: |
