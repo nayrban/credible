@@ -8,7 +8,7 @@
 
 # Install Flutter
 
-[Fluuter for Linux](https://docs.flutter.dev/get-started/install/linux)
+[Flutter for Linux](https://docs.flutter.dev/get-started/install/linux)
 
 Add `flutter` to `path`
 run `sudo nano ~/.bashrc`
