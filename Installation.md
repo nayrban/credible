@@ -24,10 +24,10 @@ Use the NDK 22 and export the following libraries
 run `sudo nano ~/.bashrc`
 
 ```
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_TOOLS=$ANDROID_SDK_ROOT/build-tools/33.0.0/
-export ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/22.1.7171670/
-export TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_TOOLS="$ANDROID_SDK_ROOT/build-tools/33.0.0/"
+export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk/22.1.7171670/"
+export TOOLCHAIN="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64"
 ```
 
 
