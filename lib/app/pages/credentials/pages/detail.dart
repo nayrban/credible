@@ -30,6 +30,7 @@ class CredentialsDetail extends StatefulWidget {
 }
 
 class _CredentialsDetailState
+    // ignore: deprecated_member_use
     extends ModularState<CredentialsDetail, WalletBloc> {
   bool showShareMenu = false;
   VerificationState verification = VerificationState.Unverified;

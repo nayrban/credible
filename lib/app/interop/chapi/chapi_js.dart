@@ -14,7 +14,7 @@ external set _store(StoreFn fn);
 @JS('window.dispatchEvent')
 external void _emit(Event e);
 
-@JS()
+@JS('dart.Event')
 class Event {
   external Event(String name);
 }

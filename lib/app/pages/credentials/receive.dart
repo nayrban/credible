@@ -26,6 +26,7 @@ class CredentialsReceivePage extends StatefulWidget {
 }
 
 class _CredentialsReceivePageState
+    // ignore: deprecated_member_use
     extends ModularState<CredentialsReceivePage, ScanBloc> {
   final VoidCallback goBack = () {
     Modular.to.pushReplacementNamed('/credentials/list');

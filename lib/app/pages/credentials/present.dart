@@ -4,7 +4,6 @@ import 'package:credible/app/shared/widget/base/button.dart';
 import 'package:credible/app/shared/widget/base/page.dart';
 import 'package:credible/app/shared/widget/spinner.dart';
 import 'package:credible/app/shared/widget/tooltip_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -33,6 +32,7 @@ class CredentialsPresentPage extends StatefulWidget {
 }
 
 class _CredentialsPresentPageState
+    // ignore: deprecated_member_use
     extends ModularState<CredentialsPresentPage, ScanBloc> {
   final VoidCallback goBack = () {
     Modular.to.pushReplacementNamed('/credentials/list');

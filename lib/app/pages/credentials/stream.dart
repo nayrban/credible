@@ -1,7 +1,6 @@
 import 'package:credible/app/pages/credentials/blocs/wallet.dart';
 import 'package:credible/app/pages/credentials/models/credential.dart';
 import 'package:credible/app/shared/widget/base/page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,6 +23,7 @@ class CredentialsStream extends StatefulWidget {
 }
 
 class _CredentialsStreamState
+    // ignore: deprecated_member_use
     extends ModularState<CredentialsStream, WalletBloc> {
   @override
   void initState() {

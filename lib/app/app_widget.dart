@@ -39,7 +39,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
     _controller = SecureApplicationController(SecureApplicationState());
-    _controller.secure();
+    // _controller.secure();
   }
 
   Future<bool> _authenticate() async {

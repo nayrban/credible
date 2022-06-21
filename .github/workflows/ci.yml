@@ -10,9 +10,9 @@ on:
   pull_request:
 
 env:
-  flutter_version: "1.27.0-1.0.pre"
-  didkit_version: "0.1.0"
-  ssi_version: "0.1.0"
+  flutter_version: "3.1.0"
+  didkit_version: "0.4.0"
+  ssi_version: "0.4.0"
 
 jobs:
   android_ci:
@@ -50,7 +50,7 @@ jobs:
     - name: Clone didkit
       uses: actions/checkout@v2
       with:
-        repository: spruceid/didkit
+        repository: nayrban/didkit
         path: didkit
 
     # Clones ssi
@@ -65,34 +65,43 @@ jobs:
     - name: SETUP | Java
       uses: actions/setup-java@v1
       with:
-        java-version: '12.x'
-    
+        java-version: '11.x'
+
     # Setup the flutter environment.
     - name: SETUP | Flutter
       uses: subosito/flutter-action@v1
       with:
-        channel: 'dev'
+        channel: 'master'
 
     - name: SETUP | Rust
       uses: ATiltedTree/setup-rust@v1
       with:
-        rust-version: nightly
-  
+        rust-version: 1.59.0
+#        rust-version: sta
+
+    - name: Install Build Essentials
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+        sudo apt-get install gcc gcc-i686-linux-gnu
+        sudo apt install clang-12 --install-suggests
+        gcc --version
+
     - name: DIDKIT | rustup android
       working-directory: ./didkit
       run: make -C lib install-rustup-android
 
     - name: DIDKIT | android.stamp
       working-directory: ./didkit
-      run: make -C lib ../target/test/android.stamp
+      run: make AR=llvm-ar RANLIB=llvm-ranlib -C lib ../target/test/android.stamp
 
     - name: FLUTTER | pub get
       working-directory: ./main
       run: flutter pub get
 
-    # - name: FLUTTER | build apk
-    #   working-directory: ./main
-    #   run: flutter build apk --release
+    - name: FLUTTER | build apk
+      working-directory: ./main
+      run: flutter build apk --release
 
     # - uses: actions/upload-artifact@v2
     #   with:
@@ -114,85 +123,85 @@ jobs:
       working-directory: ./main
       run: flutter test test/
   
-  ios_ci:
-    # This job will run on macos virtual machine
-    runs-on: macos-latest
-    steps:
-      
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        path: main
-
-    # Clones didkit
-    - name: Clone didkit
-      uses: actions/checkout@v2
-      with:
-        repository: spruceid/didkit
-        path: didkit
-
-    # Clones ssi
-    - name: Clone SSI
-      uses: actions/checkout@v2
-      with:
-        repository: spruceid/ssi
-        path: ssi
-        submodules: 'recursive'
-
-    # Setup the flutter environment.
-    - name: SETUP | Flutter
-      uses: subosito/flutter-action@v1
-      with:
-        channel: 'dev'
-
-    - name: SETUP | Rust
-      uses: ATiltedTree/setup-rust@v1
-      with:
-        rust-version: nightly
-  
-    - name: DIDKIT | rustup ios
-      working-directory: ./didkit
-      run: make -C lib install-rustup-ios
-
-    - name: DIDKIT | ios.stamp
-      working-directory: ./didkit
-      run: make -C lib ../target/test/ios.stamp
-      
-    - name: FLUTTER | pub get
-      working-directory: ./main
-      run: flutter pub get
-
-    # Check for any formatting issues in the code.
-    - name: FLUTTER | format
-      working-directory: ./main
-      run: flutter format --set-exit-if-changed .
-
-    # Statically analyze the Dart code for any errors.
-    - name: FLUTTER | analyze
-      working-directory: ./main
-      run: flutter analyze .
-
-    # Run widget tests for our flutter project.
-    - name: FLUTTER | test
-      working-directory: ./main
-      run: flutter test test/
-
-    # # Build apk.
-    # - run: flutter build apk --release
-    
-    # # Upload generated apk to the artifacts.
-    # - name: Upload apk
-    # - uses: actions/upload-artifact@v1
-    #   with:
-    #     name: release-apk
-    #     path: build/app/outputs/apk/release/app-release.apk
-    
-    # # Build ipa.
-    # - run: flutter build ios --release --no-codesign
-        
-    # # Upload generated apk to the artifacts.
-    # - name: Upload IPA
-    #   uses: actions/upload-artifact@v1
-    #   with:
-    #     name: ios-build
-    #     path: build/ios/iphoneos
+#  ios_ci:
+#    # This job will run on macos virtual machine
+#    runs-on: macos-latest
+#    steps:
+#
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#      with:
+#        path: main
+#
+#    # Clones didkit
+#    - name: Clone didkit
+#      uses: actions/checkout@v2
+#      with:
+#        repository: spruceid/didkit
+#        path: didkit
+#
+#    # Clones ssi
+#    - name: Clone SSI
+#      uses: actions/checkout@v2
+#      with:
+#        repository: spruceid/ssi
+#        path: ssi
+#        submodules: 'recursive'
+#
+#    # Setup the flutter environment.
+#    - name: SETUP | Flutter
+#      uses: subosito/flutter-action@v1
+#      with:
+#        channel: 'beta'
+#
+#    - name: SETUP | Rust
+#      uses: ATiltedTree/setup-rust@v1
+#      with:
+#        rust-version: stable
+#
+#    - name: DIDKIT | rustup ios
+#      working-directory: ./didkit
+#      run: make -C lib install-rustup-ios
+#
+#    - name: DIDKIT | ios.stamp
+#      working-directory: ./didkit
+#      run: make -C lib ../target/test/ios.stamp
+#
+#    - name: FLUTTER | pub get
+#      working-directory: ./main
+#      run: flutter pub get
+#
+#    # Check for any formatting issues in the code.
+#    - name: FLUTTER | format
+#      working-directory: ./main
+#      run: flutter format --set-exit-if-changed .
+#
+#    # Statically analyze the Dart code for any errors.
+#    - name: FLUTTER | analyze
+#      working-directory: ./main
+#      run: flutter analyze .
+#
+#    # Run widget tests for our flutter project.
+#    - name: FLUTTER | test
+#      working-directory: ./main
+#      run: flutter test test/
+#
+#    # # Build apk.
+#    # - run: flutter build apk --release
+#
+#    # # Upload generated apk to the artifacts.
+#    # - name: Upload apk
+#    # - uses: actions/upload-artifact@v1
+#    #   with:
+#    #     name: release-apk
+#    #     path: build/app/outputs/apk/release/app-release.apk
+#
+#    # # Build ipa.
+#    # - run: flutter build ios --release --no-codesign
+#
+#    # # Upload generated apk to the artifacts.
+#    # - name: Upload IPA
+#    #   uses: actions/upload-artifact@v1
+#    #   with:
+#    #     name: ios-build
+#    #     path: build/ios/iphoneos
