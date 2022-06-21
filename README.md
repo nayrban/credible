@@ -63,7 +63,7 @@ We currently only support build this project using the `dev` channel of Flutter.
 To change your installation to the `dev` channel, please execute the following command:
 
 ```bash
-$ flutter channel dev
+$ flutter channel beta
 $ flutter upgrade
 ```
 

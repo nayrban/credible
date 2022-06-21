@@ -55,13 +55,15 @@ sudo apt-get install -y build-essential
 then run: `make -C lib install-rustup-android`
 
 
-anf finally run, and wait for the compilation to complete
+after that run, and wait for the compilation to complete
 ```
 make \
     AR=$TOOLCHAIN/bin/llvm-ar \
     RANLIB=$TOOLCHAIN/bin/llvm-ranlib \
     -C lib ../target/test/android.stamp
 ```
+
+and finally run `sudo ln -s target/libdidkit.so /usr/lib`
 
 ## Download credible from nayrban/credibl 
 Then enter the directory
